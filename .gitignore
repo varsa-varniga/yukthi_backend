@@ -1,0 +1,16 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+agrovihan-env/
+venv/
+env/
+
+# pip cache / logs
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# dotenv / environment variables
+.env
