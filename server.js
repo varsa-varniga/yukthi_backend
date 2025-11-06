@@ -1,4 +1,5 @@
 // server.js
+
 import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
@@ -13,6 +14,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middlewares
 app.use(express.json());
 app.use(cookieParser());
 
@@ -34,9 +36,9 @@ app.use(
   })
 );
 
-// ✅ Log to confirm which origin is being used
 console.log("CORS allowed origins:", allowedOrigins);
 
+// ✅ MongoDB Connection
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/agv_platform", {
     useNewUrlParser: true,
@@ -45,6 +47,7 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
+// ✅ Routes
 app.use("/auth", authRoutes);
 app.use("/sprouter", sprouterRoutes);
 
@@ -52,6 +55,7 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+// Error Handling
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
